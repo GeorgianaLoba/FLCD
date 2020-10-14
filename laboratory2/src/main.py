@@ -4,14 +4,14 @@ from src.SymbolTable import SymbolTable
 def test():
     size = 15
     st = SymbolTable(size)
-    identifiers = ['a', 'b', 'geo', 'd']
-    constants = [15, 2, 7]
+    firstVals = ['a', 'b', 'geo', 'd']
+    secondVals = ['15', '2', '7']
     assert (st.size()) == (0)
-    for identifier in identifiers:
+    for identifier in firstVals:
         st.add(identifier)
     assert (st.size()) == (4)
-    for constant in constants:
-        st.add(constant)
+    for identifier in secondVals:
+        st.add(identifier)
     assert (st.size()) == (7)
     listPosition, dequePosition = st.getPosition('z')
     assert (listPosition) == (-1)
