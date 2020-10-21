@@ -6,9 +6,6 @@ class HashTable:
         self.__values = [deque() for _ in range(length)]
         self.__size = 0
 
-    # def hash(self, key) -> int:
-    #     return hash(key) % len(self.__values)
-
     def hash(self, key):
         asciiSum = 0
         for character in key:

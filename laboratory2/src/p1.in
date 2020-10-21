@@ -1,0 +1,11 @@
+let func check_max(integer a, integer b, integer c) returns integer {
+    print "This function will compute the max";
+    if (a>b) then{
+        if (a>c) then return a
+        else return c
+    }
+    else{
+        if (b>c) then return b
+        else return c
+    }
+};
