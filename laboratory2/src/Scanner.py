@@ -87,10 +87,14 @@ class Scanner:
                         if token == ' ':
                             continue
                         self.__pif.add(token, (-1, -1))
-                    elif self.check_identifier(token) or self.check_constant(token):
+                    if self.check_identifier(token):
                         self.__symbol_table.add(token)
                         position = self.__symbol_table.getPosition(token)
-                        self.__pif.add(token, position)
+                        self.__pif.add('id', position)
+                    if self.check_constant(token):
+                        self.__symbol_table.add(token)
+                        position = self.__symbol_table.getPosition(token)
+                        self.__pif.add('constant', position)
                     else:
                         error += "Lexical error at token " + token + " on pisition: " + line_counter + "\n"
         if error == "":

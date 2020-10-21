@@ -1,10 +1,10 @@
 0: deque(['b', '"This function will compute the max"']); 
-1: deque(['c']); 
-2: deque([]); 
-3: deque([]); 
-4: deque([]); 
-5: deque([]); 
-6: deque([]); 
-7: deque([]); 
+1: deque(['let', 'c', 'returns', ';', 'if']); 
+2: deque(['(']); 
+3: deque([')', 'else']); 
+4: deque(['integer', '>', 'return']); 
+5: deque(['{']); 
+6: deque(['func', ',']); 
+7: deque(['print', '}']); 
 8: deque([]); 
-9: deque(['check_max', 'a']); 
+9: deque(['check_max', 'a', 'then']); 
