@@ -34,7 +34,7 @@ def test():
     separators = ["(", ")", ",", ";", " ", "{", "}"]
     scanner = Scanner(reservedWords, operators, separators)
     scanner.read_file('p1.in')
-    scanner.write_files()
+    scanner.write_files('p1-st.out', 'p1-pif.out')
 
 
 

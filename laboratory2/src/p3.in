@@ -1,0 +1,10 @@
+let func compute_sum_array (array arr, integer len) returns integer
+{
+    let i=0;
+    let s=0;
+    while (i<len) then {
+        s=s+arr[i];
+        i=i+1;
+    }
+    return s
+};

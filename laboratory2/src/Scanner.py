@@ -31,16 +31,20 @@ class Scanner:
     def check_operator(self, operator) -> bool:
         return operator in self.__operators
 
-    def get_tokens(self, l):
+    def get_tokens(self, l, line_idx):
         line = l.strip()  # dont need u whitespace
         token = ''
         tokens = []
+        error = ""
         index = 0
         while index < len(line):
             if self.check_operator(line[index]):
                 if token:
                     tokens.append(token)
-                token, index = line[index], index + 1
+                token = ''
+                while index < len(line) and self.check_operator(line[index]):
+                    token += line[index]
+                    index += 1
                 tokens.append(token)
                 token = ''
             if line[index] == '\"':
@@ -53,6 +57,8 @@ class Scanner:
                         quotes += 1
                     token += line[index]
                     index += 1
+                if quotes<2:
+                    error += "Lexical error at token " + token + " on pisition: " + str(line_idx) + "\n"
                 tokens.append(token)
                 token = ''
             elif line[index] in self.__separators:
@@ -66,7 +72,7 @@ class Scanner:
                 index += 1
         if token:
             tokens.append(token)
-        return tokens
+        return tokens, error
 
     def read_file(self, file_name):
         error = ""
@@ -74,7 +80,8 @@ class Scanner:
             line_counter = 0
             for line in lines:
                 line_counter += 1
-                tokens = self.get_tokens(line)
+                tokens, err = self.get_tokens(line, line_counter)
+                error += err
                 for token in tokens:
                     if token in self.__reserved_words or token in self.__separators or token in self.__operators:
                         if token == ' ':
@@ -91,8 +98,8 @@ class Scanner:
         else:
             print(error)
 
-    def write_files(self):
-        with open('st.out', 'w') as writer:
+    def write_files(self, st_file, pif_file):
+        with open(st_file, 'w') as writer:
             writer.write(str(self.__symbol_table))
-        with open('pif.out', 'w') as writer:
+        with open(pif_file, 'w') as writer:
             writer.write(str(self.__pif))

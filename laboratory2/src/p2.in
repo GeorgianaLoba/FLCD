@@ -1,0 +1,10 @@
+let func check_prime (integer a) returns boolean {
+    if (a is 1) or (a is 2) then return 1
+    if (a%2 is 0) then return 0
+    let d=2;
+    while (d <= a/2) then {
+        if (a%d is 0) then return 0
+        d=d+1
+    }
+    return 1
+};
