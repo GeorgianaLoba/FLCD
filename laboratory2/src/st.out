@@ -1,10 +1,10 @@
-0: deque(['b']); 
-1: deque(['c']); 
+0: deque(['0']); 
+1: deque(['arr', '1']); 
 2: deque([]); 
-3: deque([]); 
+3: deque(['compute_sum_array', '3']); 
 4: deque([]); 
-5: deque([]); 
-6: deque([]); 
-7: deque([]); 
-8: deque(['This function will compute the max']); 
-9: deque(['check_max', 'a']); 
+5: deque(['len']); 
+6: deque(['arr[i]']); 
+7: deque(['i', 's']); 
+8: deque([]); 
+9: deque([]); 

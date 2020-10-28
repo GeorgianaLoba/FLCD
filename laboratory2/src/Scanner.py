@@ -19,12 +19,12 @@ class Scanner:
         if constant == 'true':
             return True
         if constant == 'false':
-            return False
-        if re.match('[0-9a-zA-Z]', constant) is not None:
             return True
-        if re.match('[a-zA-Z]{0,}', constant) is not None:
+        if re.match('\'[0-9a-zA-Z]\'', constant) is not None:
             return True
-        if re.match('[+-]?[1-9][0-9]{0,}', constant) is not None:
+        if re.match('\"[a-zA-Z]{0,}\"', constant) is not None:
+            return True
+        if re.match('^[-+]?([1-9]\d*|0)$', constant) is not None:
             return True
         return False
 
@@ -50,14 +50,12 @@ class Scanner:
             elif line[index] == '\"':
                 if token:
                     tokens.append(token)
-                token = ''
                 closed = False
+                token += line[index]
                 index += 1
                 while index < len(line) and not closed:
                     if line[index] == '\"':
                         closed = True
-                        index += 1
-                        break
                     token += line[index]
                     index += 1
                 tokens.append(token)
@@ -67,17 +65,15 @@ class Scanner:
             elif line[index] == '\'':
                 if token:
                     tokens.append(token)
-                token = ''
                 closed = False
+                token += line[index]
                 index += 1
                 while index < len(line) and not closed:
                     if line[index] == '\'':
                         closed = True
-                        index += 1
-                        break
                     token += line[index]
                     index += 1
-                if len(token) >= 2:
+                if len(token) > 3:
                     error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
                 if not closed:
                     error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
@@ -118,7 +114,7 @@ class Scanner:
                         position = self.__symbol_table.getPosition(token)
                         self.__pif.add('constant', position)
                     else:
-                        error += "Lexical error at token " + token + " on pisition: " + line_counter + "\n"
+                        error += "Lexical error at token " + token + " on pisition: " + str(line_counter) + "\n"
         if error == "":
             print("Lexically correct!!!")
         else:
