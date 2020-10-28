@@ -33,7 +33,7 @@ def test():
     operators = ["<", "<=", ">", " >=", "==", "!=", "=", "+", "-", "*", "%", "/"]
     separators = ["(", ")", ",", ";", "\"", " ", "{", "}"]
     scanner = Scanner(reservedWords, operators, separators)
-    scanner.read_file('p1error.in')
+    scanner.read_file('p1.in')
     scanner.write_files('st.out', 'pif.out')
 
 

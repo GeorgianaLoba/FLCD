@@ -1,4 +1,4 @@
-0: deque(['b', "This function will compute the max';"]); 
+0: deque(['b']); 
 1: deque(['c']); 
 2: deque([]); 
 3: deque([]); 
@@ -6,5 +6,5 @@
 5: deque([]); 
 6: deque([]); 
 7: deque([]); 
-8: deque([]); 
+8: deque(['This function will compute the max']); 
 9: deque(['check_max', 'a']); 

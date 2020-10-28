@@ -51,33 +51,35 @@ class Scanner:
                 if token:
                     tokens.append(token)
                 token = ''
-                quotes = 0
+                closed = False
                 index += 1
-                while index < len(line) and quotes < 2:
+                while index < len(line) and not closed:
                     if line[index] == '\"':
-                        quotes += 1
+                        closed = True
+                        index += 1
                         break
                     token += line[index]
                     index += 1
                 tokens.append(token)
                 token = ''
-                if quotes < 2:
+                if not closed:
                     error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
             elif line[index] == '\'':
                 if token:
                     tokens.append(token)
                 token = ''
-                quotes = 0
+                closed = False
                 index += 1
-                while index < len(line) and quotes < 2:
+                while index < len(line) and not closed:
                     if line[index] == '\'':
-                        quotes += 1
+                        closed = True
+                        index += 1
                         break
                     token += line[index]
                     index += 1
                 if len(token) >= 2:
                     error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
-                if quotes < 2:
+                if not closed:
                     error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
                 tokens.append(token)
                 token = ''
