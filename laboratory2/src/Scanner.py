@@ -47,18 +47,38 @@ class Scanner:
                     index += 1
                 tokens.append(token)
                 token = ''
-            if line[index] == '\"':
+            elif line[index] == '\"':
                 if token:
                     tokens.append(token)
                 token = ''
                 quotes = 0
+                index += 1
                 while index < len(line) and quotes < 2:
                     if line[index] == '\"':
                         quotes += 1
+                        break
                     token += line[index]
                     index += 1
-                if quotes<2:
-                    error += "Lexical error at token " + token + " on pisition: " + str(line_idx) + "\n"
+                tokens.append(token)
+                token = ''
+                if quotes < 2:
+                    error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
+            elif line[index] == '\'':
+                if token:
+                    tokens.append(token)
+                token = ''
+                quotes = 0
+                index += 1
+                while index < len(line) and quotes < 2:
+                    if line[index] == '\'':
+                        quotes += 1
+                        break
+                    token += line[index]
+                    index += 1
+                if len(token) >= 2:
+                    error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
+                if quotes < 2:
+                    error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
                 tokens.append(token)
                 token = ''
             elif line[index] in self.__separators:
@@ -87,11 +107,11 @@ class Scanner:
                         if token == ' ':
                             continue
                         self.__pif.add(token, (-1, -1))
-                    if self.check_identifier(token):
+                    elif self.check_identifier(token):
                         self.__symbol_table.add(token)
                         position = self.__symbol_table.getPosition(token)
                         self.__pif.add('id', position)
-                    if self.check_constant(token):
+                    elif self.check_constant(token):
                         self.__symbol_table.add(token)
                         position = self.__symbol_table.getPosition(token)
                         self.__pif.add('constant', position)

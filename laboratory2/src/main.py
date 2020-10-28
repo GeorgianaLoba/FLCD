@@ -31,10 +31,10 @@ def test():
     reservedWords = ["let", "func", "returns", "is", "or", "and", "print", "while", "return", "if", "else", "then",
                      "integer", "boolean", "array", "true", "false", "scan"]
     operators = ["<", "<=", ">", " >=", "==", "!=", "=", "+", "-", "*", "%", "/"]
-    separators = ["(", ")", ",", ";", " ", "{", "}"]
+    separators = ["(", ")", ",", ";", "\"", " ", "{", "}"]
     scanner = Scanner(reservedWords, operators, separators)
-    scanner.read_file('p1.in')
-    scanner.write_files('p1-st.out', 'p1-pif.out')
+    scanner.read_file('p1error.in')
+    scanner.write_files('st.out', 'pif.out')
 
 
 
