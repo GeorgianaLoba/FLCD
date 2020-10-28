@@ -43,8 +43,20 @@ class Scanner:
                     tokens.append(token)
                 token = ''
                 while index < len(line) and self.check_operator(line[index]):
-                    token += line[index]
-                    index += 1
+                    aux = token + line[index]
+                    if self.check_operator(aux):
+                        token += line[index]
+                        index += 1
+                    elif line[index]== '-' or line[index]=='+':
+                        tokens.append(token)
+                        token = line[index]
+                        index += 1
+                        while index<len(line) and self.check_constant(line[index]):
+                            token += line[index]
+                            index += 1
+                        tokens.append(token)
+                        token =''
+                        break
                 tokens.append(token)
                 token = ''
             elif line[index] == '\"':
@@ -61,7 +73,7 @@ class Scanner:
                 tokens.append(token)
                 token = ''
                 if not closed:
-                    error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
+                    error += "1Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
             elif line[index] == '\'':
                 if token:
                     tokens.append(token)
@@ -74,9 +86,9 @@ class Scanner:
                     token += line[index]
                     index += 1
                 if len(token) > 3:
-                    error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
+                    error += "2Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
                 if not closed:
-                    error += "Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
+                    error += "3Lexical error at token " + token + " on line: " + str(line_idx) + "\n"
                 tokens.append(token)
                 token = ''
             elif line[index] in self.__separators:
@@ -114,7 +126,9 @@ class Scanner:
                         position = self.__symbol_table.getPosition(token)
                         self.__pif.add('constant', position)
                     else:
-                        error += "Lexical error at token " + token + " on pisition: " + str(line_counter) + "\n"
+                        if token != ' ':
+                            error += "4Lexical error at token " + token + " on line: " + str(line_counter) + "\n"
+
         if error == "":
             print("Lexically correct!!!")
         else:
