@@ -10,7 +10,7 @@ class FiniteAutomata:
     def __init__(self):
         self.Q = []
         self.Sigma = []
-        self.q0 = []
+        self.q0 = ""
         self.F = []
         self.Delta = []
 
@@ -22,7 +22,7 @@ class FiniteAutomata:
             # first 4 lines are fixed sized
             self.Q = self.split_line(f.readline())
             self.Sigma = self.split_line(f.readline())
-            self.q0 = self.split_line(f.readline())
+            self.q0 = self.split_line(f.readline())[0]
             self.F = self.split_line(f.readline())
             for line in f:
                 self.Delta.append(Transition.get_transition_from_line(line))
