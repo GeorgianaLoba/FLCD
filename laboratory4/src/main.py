@@ -9,6 +9,8 @@ def display():
     print('Press 4 for set of final states')
     print('Press 5 for transitions')
     print('Press 6 for entire FA')
+    print('Press 7 for checking if DFA')
+    print('Press 8 for checking if your sequence is accepted by the FA')
     print('Press 0 for BYE! :)')
 
 
@@ -34,6 +36,20 @@ def main():
                 print(transition)
         if inp == 6:
             print(fa)
+        if inp == 7:
+            result = fa.is_deterministic()
+            if result:
+                print('Is deterministic!')
+            else:
+                print('Not deterministic!')
+        if inp == 8:
+
+            sequence = input('\nEnter sequence: ')
+            result = fa.is_accepted(sequence)
+            if result:
+                print(sequence + ' is accepted!')
+            else:
+                print(sequence + ' is not accepted!')
 
 
 if __name__ == '__main__':
