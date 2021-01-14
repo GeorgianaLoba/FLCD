@@ -1,5 +1,5 @@
 let func check (integer a) returns integer 
 {
-	1
+	return a;
 };
  
